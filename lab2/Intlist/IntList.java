@@ -82,7 +82,22 @@ public class IntList {
 
     public static IntList dcatenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        //dcatenate（IntList A， IntList B）：返回一个包含 A 的所有元素的列表，后跟 B 的所有元素。由您完成。
+
+        // 在lab中讲了破坏性和非破坏性的做法  我如果直接修改A 把它最后指向B开头 那就是破坏性
+        //非破坏性应该是创建一个新的  把A B元素加进来
+        //哦我没有看要求   下面一个函数才是要求不要修改A   这个函数是要修改A
+
+        if (A == null) {
+            return B;
+        }
+        IntList ptr = A;  // 保存A的头部引用
+        while (ptr.rest != null) {  // 找到A的最后一个节点
+            ptr = ptr.rest;
+        }
+        ptr.rest = B;  // 将B直接连接到A的末尾
+        return A;  // 返回原始A的头部
+
     }
 
     /**
@@ -91,7 +106,27 @@ public class IntList {
      */
     public static IntList catenate(IntList A, IntList B) {
         //TODO:  fill in method
-        return null;
+        //catenate（IntList A， IntList B）：返回一个包含 A 的所有元素的列表，后跟 B 的所有元素。由您完成。
+
+        if (A == null) {
+            return B;
+        }
+
+        IntList res = new IntList(A.first , null);
+        IntList cur = res;
+        A = A.rest;
+        while (A != null) {
+            cur.rest = new IntList(A.first , null);
+            A = A.rest;
+            cur = cur.rest;
+        }
+        while (B != null) {
+            cur.rest = new IntList(B.first , null);
+            B = B.rest;
+            cur = cur.rest;
+        }
+        return res;
+
     }
 
 

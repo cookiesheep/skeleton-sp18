@@ -7,35 +7,51 @@ public class DebugExercise2 {
       * This function may have a bug, but if it does, you should find it
       * by stepping over, not into. */
     public static int max(int a, int b) {
-        int w = (b - a) >> 31;
-        /* If you're stepping into this function, click the
-           step out button because you're not going to learn anything. */
-        int z = ~(b - a) >> 31;
-
-        int max = b & w | a & z;
-        return max;
+//        int w = (b - a) >> 31;
+//        /* If you're stepping into this function, click the
+//           step out button because you're not going to learn anything. */
+//        int z = ~(b - a) >> 31;
+//
+//        int max = b & w | a & z;
+//        return max;
+//    }
+        if (a > b) {
+            return a;
+        } else {
+            return b;
+        }
     }
+    //通过debug发现是max函数有问题  它反过来 返回的是小的那个  所以重新写了一个
+
+
 
 
     /** Returns the sum of a and b. Do not step into this function. 
       * This function may have a bug, but if it does, you should find it
-      * by stepping over, not into. */    
-    public static int add(int a, int b) {
-        int x = a, y = b;
-        /* If you're stepping into this function, click the
-           step out button because you're not going to learn anything. */
-        int xor, and, temp;
-        and = x & y;
-        xor = x ^ y;
+      * by stepping over, not into. */
 
-        while (and != 0) {
-            and <<= 1;
-            temp = xor ^ and;
-            and &= xor;
-            xor = temp;
-        }
-        return xor;
+    //通过debug发现 修复完max函数后数组结果正确了  但是加和错误
+    //add函数也有问题
+    public static int add(int a, int b) {
+//        int x = a, y = b;
+//        /* If you're stepping into this function, click the
+//           step out button because you're not going to learn anything. */
+//        int xor, and, temp;
+//        and = x & y;
+//        xor = x ^ y;
+//
+//        while (and != 0) {
+//            and <<= 1;
+//            temp = xor ^ and;
+//            and &= xor;
+//            xor = temp;
+//        }
+//        return xor;
+//    }
+        return a + b;
     }
+    //不对  add函数没有问题  是arraySum函数有问题
+
 
     /** Returns a new array where entry i is the max of
      * a[i] and b[i]. For example, if a = {1, -10, 3}
@@ -60,7 +76,8 @@ public class DebugExercise2 {
         int i = 0;
         int sum = 0;
         while (i < x.length) {
-            sum = sum + add(sum, x[i]);
+//            sum = sum + add(sum, x[i]);
+            sum = add(sum, x[i]);
             i = i + 1;
         }
         return sum;
